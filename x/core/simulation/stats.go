@@ -1,0 +1,147 @@
+package simulation
+
+import (
+	"math/rand"
+	"strconv"
+
+	simappparams "cosmossdk.io/simapp/params"
+	"github.com/cosmos/cosmos-sdk/baseapp"
+	sdk "github.com/cosmos/cosmos-sdk/types"
+	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
+	"github.com/cosmos/cosmos-sdk/x/simulation"
+	"one/x/core/keeper"
+	"one/x/core/types"
+)
+
+// Prevent strconv unused error
+var _ = strconv.IntSize
+
+func SimulateMsgCreateStats(
+	ak types.AccountKeeper,
+	bk types.BankKeeper,
+	k keeper.Keeper,
+) simtypes.Operation {
+	return func(r *rand.Rand, app *baseapp.BaseApp, ctx sdk.Context, accs []simtypes.Account, chainID string,
+	) (simtypes.OperationMsg, []simtypes.FutureOperation, error) {
+		simAccount, _ := simtypes.RandomAcc(r, accs)
+
+		i := r.Int()
+		msg := &types.MsgCreateStats{
+			Creator: simAccount.Address.String(),
+			Index:   strconv.Itoa(i),
+		}
+
+		_, found := k.GetStats(ctx, msg.Index)
+		if found {
+			return simtypes.NoOpMsg(types.ModuleName, msg.Type(), "Stats already exist"), nil, nil
+		}
+
+		txCtx := simulation.OperationInput{
+			R:               r,
+			App:             app,
+			TxGen:           simappparams.MakeTestEncodingConfig().TxConfig,
+			Cdc:             nil,
+			Msg:             msg,
+			MsgType:         msg.Type(),
+			Context:         ctx,
+			SimAccount:      simAccount,
+			ModuleName:      types.ModuleName,
+			CoinsSpentInMsg: sdk.NewCoins(),
+			AccountKeeper:   ak,
+			Bankkeeper:      bk,
+		}
+		return simulation.GenAndDeliverTxWithRandFees(txCtx)
+	}
+}
+
+func SimulateMsgUpdateStats(
+	ak types.AccountKeeper,
+	bk types.BankKeeper,
+	k keeper.Keeper,
+) simtypes.Operation {
+	return func(r *rand.Rand, app *baseapp.BaseApp, ctx sdk.Context, accs []simtypes.Account, chainID string,
+	) (simtypes.OperationMsg, []simtypes.FutureOperation, error) {
+		var (
+			simAccount = simtypes.Account{}
+			stats      = types.Stats{}
+			msg        = &types.MsgUpdateStats{}
+			allStats   = k.GetAllStats(ctx)
+			found      = false
+		)
+		for _, obj := range allStats {
+			simAccount, found = FindAccount(accs, obj.Creator)
+			if found {
+				stats = obj
+				break
+			}
+		}
+		if !found {
+			return simtypes.NoOpMsg(types.ModuleName, msg.Type(), "stats creator not found"), nil, nil
+		}
+		msg.Creator = simAccount.Address.String()
+
+		msg.Index = stats.Index
+
+		txCtx := simulation.OperationInput{
+			R:               r,
+			App:             app,
+			TxGen:           simappparams.MakeTestEncodingConfig().TxConfig,
+			Cdc:             nil,
+			Msg:             msg,
+			MsgType:         msg.Type(),
+			Context:         ctx,
+			SimAccount:      simAccount,
+			ModuleName:      types.ModuleName,
+			CoinsSpentInMsg: sdk.NewCoins(),
+			AccountKeeper:   ak,
+			Bankkeeper:      bk,
+		}
+		return simulation.GenAndDeliverTxWithRandFees(txCtx)
+	}
+}
+
+func SimulateMsgDeleteStats(
+	ak types.AccountKeeper,
+	bk types.BankKeeper,
+	k keeper.Keeper,
+) simtypes.Operation {
+	return func(r *rand.Rand, app *baseapp.BaseApp, ctx sdk.Context, accs []simtypes.Account, chainID string,
+	) (simtypes.OperationMsg, []simtypes.FutureOperation, error) {
+		var (
+			simAccount = simtypes.Account{}
+			stats      = types.Stats{}
+			msg        = &types.MsgUpdateStats{}
+			allStats   = k.GetAllStats(ctx)
+			found      = false
+		)
+		for _, obj := range allStats {
+			simAccount, found = FindAccount(accs, obj.Creator)
+			if found {
+				stats = obj
+				break
+			}
+		}
+		if !found {
+			return simtypes.NoOpMsg(types.ModuleName, msg.Type(), "stats creator not found"), nil, nil
+		}
+		msg.Creator = simAccount.Address.String()
+
+		msg.Index = stats.Index
+
+		txCtx := simulation.OperationInput{
+			R:               r,
+			App:             app,
+			TxGen:           simappparams.MakeTestEncodingConfig().TxConfig,
+			Cdc:             nil,
+			Msg:             msg,
+			MsgType:         msg.Type(),
+			Context:         ctx,
+			SimAccount:      simAccount,
+			ModuleName:      types.ModuleName,
+			CoinsSpentInMsg: sdk.NewCoins(),
+			AccountKeeper:   ak,
+			Bankkeeper:      bk,
+		}
+		return simulation.GenAndDeliverTxWithRandFees(txCtx)
+	}
+}

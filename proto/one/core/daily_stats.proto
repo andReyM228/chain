@@ -1,0 +1,12 @@
+syntax = "proto3";
+package one.core;
+
+option go_package = "one/x/core/types";
+
+message DailyStats {
+  
+  int32 amountIssue = 1; 
+  int32 amountWithdraw = 2; 
+  int32 countIssue = 3; 
+  int32 countWithdraw = 4; 
+}

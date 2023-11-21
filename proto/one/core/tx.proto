@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package one.core;
+
+import "one/core/stats.proto";
+import "one/core/daily_stats.proto";
+
+option go_package = "one/x/core/types";
+
+// Msg defines the Msg service.
+service Msg {
+  rpc CreateStats (MsgCreateStats) returns (MsgCreateStatsResponse);
+  rpc UpdateStats (MsgUpdateStats) returns (MsgUpdateStatsResponse);
+  rpc DeleteStats (MsgDeleteStats) returns (MsgDeleteStatsResponse);
+}
+message MsgCreateStats {
+  string     creator = 1;
+  string     index   = 2;
+  string     date    = 3;
+  DailyStats stats   = 4;
+}
+
+message MsgCreateStatsResponse {}
+
+message MsgUpdateStats {
+  string     creator = 1;
+  string     index   = 2;
+  string     date    = 3;
+  DailyStats stats   = 4;
+}
+
+message MsgUpdateStatsResponse {}
+
+message MsgDeleteStats {
+  string creator = 1;
+  string index   = 2;
+}
+
+message MsgDeleteStatsResponse {}
+

@@ -1,0 +1,13 @@
+syntax = "proto3";
+package one.core;
+
+option go_package = "one/x/core/types";
+import "one/core/daily_stats.proto"; 
+
+message Stats {
+  string index = 1; 
+  string date = 2; 
+  DailyStats stats = 3; 
+  string creator = 4;
+}
+

@@ -113,6 +113,9 @@ import (
 	allowedmodule "one/x/allowed"
 	allowedmodulekeeper "one/x/allowed/keeper"
 	allowedmoduletypes "one/x/allowed/types"
+	coremodule "one/x/core"
+	coremodulekeeper "one/x/core/keeper"
+	coremoduletypes "one/x/core/types"
 	onemodule "one/x/one"
 	onemodulekeeper "one/x/one/keeper"
 	onemoduletypes "one/x/one/types"
@@ -178,6 +181,7 @@ var (
 		consensus.AppModuleBasic{},
 		onemodule.AppModuleBasic{},
 		allowedmodule.AppModuleBasic{},
+		coremodule.AppModuleBasic{},
 		// this line is used by starport scaffolding # stargate/app/moduleBasic
 	)
 
@@ -257,6 +261,8 @@ type App struct {
 	OneKeeper onemodulekeeper.Keeper
 
 	AllowedKeeper allowedmodulekeeper.Keeper
+
+	CoreKeeper coremodulekeeper.Keeper
 	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
 	// mm is the module manager
@@ -305,6 +311,7 @@ func New(
 		capabilitytypes.StoreKey, group.StoreKey, icacontrollertypes.StoreKey, consensusparamtypes.StoreKey,
 		onemoduletypes.StoreKey,
 		allowedmoduletypes.StoreKey,
+		coremoduletypes.StoreKey,
 		// this line is used by starport scaffolding # stargate/app/storeKey
 	)
 	tkeys := sdk.NewTransientStoreKeys(paramstypes.TStoreKey)
@@ -543,6 +550,14 @@ func New(
 	)
 	allowedModule := allowedmodule.NewAppModule(appCodec, app.AllowedKeeper, app.AccountKeeper, app.BankKeeper)
 
+	app.CoreKeeper = *coremodulekeeper.NewKeeper(
+		appCodec,
+		keys[coremoduletypes.StoreKey],
+		keys[coremoduletypes.MemStoreKey],
+		app.GetSubspace(coremoduletypes.ModuleName),
+	)
+	coreModule := coremodule.NewAppModule(appCodec, app.CoreKeeper, app.AccountKeeper, app.BankKeeper)
+
 	// this line is used by starport scaffolding # stargate/app/keeperDefinition
 
 	/**** IBC Routing ****/
@@ -606,6 +621,7 @@ func New(
 		icaModule,
 		oneModule,
 		allowedModule,
+		coreModule,
 		// this line is used by starport scaffolding # stargate/app/appModule
 
 		crisis.NewAppModule(app.CrisisKeeper, skipGenesisInvariants, app.GetSubspace(crisistypes.ModuleName)), // always be last to make sure that it checks for all invariants and not only part of them
@@ -640,6 +656,7 @@ func New(
 		consensusparamtypes.ModuleName,
 		onemoduletypes.ModuleName,
 		allowedmoduletypes.ModuleName,
+		coremoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/beginBlockers
 	)
 
@@ -667,6 +684,7 @@ func New(
 		consensusparamtypes.ModuleName,
 		onemoduletypes.ModuleName,
 		allowedmoduletypes.ModuleName,
+		coremoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/endBlockers
 	)
 
@@ -699,6 +717,7 @@ func New(
 		consensusparamtypes.ModuleName,
 		onemoduletypes.ModuleName,
 		allowedmoduletypes.ModuleName,
+		coremoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
 	}
 	app.mm.SetOrderInitGenesis(genesisModuleOrder...)
@@ -925,6 +944,7 @@ func initParamsKeeper(appCodec codec.BinaryCodec, legacyAmino *codec.LegacyAmino
 	paramsKeeper.Subspace(icahosttypes.SubModuleName)
 	paramsKeeper.Subspace(onemoduletypes.ModuleName)
 	paramsKeeper.Subspace(allowedmoduletypes.ModuleName)
+	paramsKeeper.Subspace(coremoduletypes.ModuleName)
 	// this line is used by starport scaffolding # stargate/app/paramSubspace
 
 	return paramsKeeper

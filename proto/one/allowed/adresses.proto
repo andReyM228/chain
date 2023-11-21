@@ -1,0 +1,10 @@
+syntax = "proto3";
+package one.allowed;
+
+option go_package = "one/x/allowed/types";
+
+message Adresses {
+  uint64 id = 1;
+  string adress = 2; 
+  string creator = 3;
+}

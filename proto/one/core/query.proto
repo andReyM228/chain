@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package one.core;
+
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "one/core/params.proto";
+import "one/core/stats.proto";
+import "one/core/daily_stats.proto";
+
+option go_package = "one/x/core/types";
+
+// Query defines the gRPC querier service.
+service Query {
+  
+  // Parameters queries the parameters of the module.
+  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
+    option (google.api.http).get = "/one/core/params";
+  
+  }
+  
+  // Queries a list of Stats items.
+  rpc Stats    (QueryGetStatsRequest) returns (QueryGetStatsResponse) {
+    option (google.api.http).get = "/one/core/stats/{index}";
+  
+  }
+  rpc StatsAll (QueryAllStatsRequest) returns (QueryAllStatsResponse) {
+    option (google.api.http).get = "/one/core/stats";
+  
+  }
+}
+// QueryParamsRequest is request type for the Query/Params RPC method.
+message QueryParamsRequest {}
+
+// QueryParamsResponse is response type for the Query/Params RPC method.
+message QueryParamsResponse {
+  
+  // params holds all the parameters of this module.
+  Params params = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryGetStatsRequest {
+  string index = 1;
+}
+
+message QueryGetStatsResponse {
+  Stats stats = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllStatsRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllStatsResponse {
+  repeated Stats                                  stats      = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+

@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package one.allowed;
+
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "one/allowed/params.proto";
+import "one/allowed/adresses.proto";
+
+option go_package = "one/x/allowed/types";
+
+// Query defines the gRPC querier service.
+service Query {
+  
+  // Parameters queries the parameters of the module.
+  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
+    option (google.api.http).get = "/one/allowed/params";
+  
+  }
+  
+  // Queries a list of Adresses items.
+  rpc Adresses    (QueryGetAdressesRequest) returns (QueryGetAdressesResponse) {
+    option (google.api.http).get = "/one/allowed/adresses/{id}";
+  
+  }
+  rpc AdressesAll (QueryAllAdressesRequest) returns (QueryAllAdressesResponse) {
+    option (google.api.http).get = "/one/allowed/adresses";
+  
+  }
+}
+// QueryParamsRequest is request type for the Query/Params RPC method.
+message QueryParamsRequest {}
+
+// QueryParamsResponse is response type for the Query/Params RPC method.
+message QueryParamsResponse {
+  
+  // params holds all the parameters of this module.
+  Params params = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryGetAdressesRequest {
+  uint64 id = 1;
+}
+
+message QueryGetAdressesResponse {
+  Adresses Adresses = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllAdressesRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllAdressesResponse {
+  repeated Adresses                               Adresses   = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+

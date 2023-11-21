@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package one.allowed;
+
+import "one/allowed/adresses.proto";
+
+option go_package = "one/x/allowed/types";
+
+// Msg defines the Msg service.
+service Msg {
+  rpc CreateAdresses (MsgCreateAdresses) returns (MsgCreateAdressesResponse);
+  rpc UpdateAdresses (MsgUpdateAdresses) returns (MsgUpdateAdressesResponse);
+  rpc DeleteAdresses (MsgDeleteAdresses) returns (MsgDeleteAdressesResponse);
+}
+message MsgCreateAdresses {
+  string creator = 1;
+  string adress  = 2;
+}
+
+message MsgCreateAdressesResponse {
+  uint64 id = 1;
+}
+
+message MsgUpdateAdresses {
+  string creator = 1;
+  uint64 id      = 2;
+  string adress  = 3;
+}
+
+message MsgUpdateAdressesResponse {}
+
+message MsgDeleteAdresses {
+  string creator = 1;
+  uint64 id      = 2;
+}
+
+message MsgDeleteAdressesResponse {}
+

@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package one.allowed;
+
+import "gogoproto/gogo.proto";
+import "one/allowed/params.proto";
+import "one/allowed/adresses.proto";
+
+option go_package = "one/x/allowed/types";
+
+// GenesisState defines the allowed module's genesis state.
+message GenesisState {
+           Params   params        = 1 [(gogoproto.nullable) = false];
+  repeated Adresses adressesList  = 2 [(gogoproto.nullable) = false];
+           uint64   adressesCount = 3;
+}
+

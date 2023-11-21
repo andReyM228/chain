@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package one.core;
+
+import "gogoproto/gogo.proto";
+import "one/core/params.proto";
+import "one/core/stats.proto";
+
+option go_package = "one/x/core/types";
+
+// GenesisState defines the core module's genesis state.
+message GenesisState {
+           Params params    = 1 [(gogoproto.nullable) = false];
+  repeated Stats  statsList = 2 [(gogoproto.nullable) = false];
+}
+
