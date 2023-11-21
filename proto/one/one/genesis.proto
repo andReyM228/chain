@@ -1,0 +1,12 @@
+syntax = "proto3";
+package one.one;
+
+import "gogoproto/gogo.proto";
+import "one/one/params.proto";
+
+option go_package = "one/x/one/types";
+
+// GenesisState defines the one module's genesis state.
+message GenesisState {
+  Params params = 1 [(gogoproto.nullable) = false];
+}
