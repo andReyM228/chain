@@ -75758,6 +75758,8 @@ definitions:
     type: object
   one.core.MsgDeleteStatsResponse:
     type: object
+  one.core.MsgIssueResponse:
+    type: object
   one.core.MsgUpdateStatsResponse:
     type: object
   one.core.Params:

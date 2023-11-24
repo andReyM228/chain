@@ -196,6 +196,7 @@ var (
 		govtypes.ModuleName:            {authtypes.Burner},
 		ibctransfertypes.ModuleName:    {authtypes.Minter, authtypes.Burner},
 		allowedmoduletypes.ModuleName:  nil,
+		coremoduletypes.ModuleName:     {authtypes.Minter, authtypes.Burner},
 		// this line is used by starport scaffolding # stargate/app/maccPerms
 	}
 )
@@ -555,6 +556,7 @@ func New(
 		keys[coremoduletypes.StoreKey],
 		keys[coremoduletypes.MemStoreKey],
 		app.GetSubspace(coremoduletypes.ModuleName),
+		app.BankKeeper,
 	)
 	coreModule := coremodule.NewAppModule(appCodec, app.CoreKeeper, app.AccountKeeper, app.BankKeeper)
 
