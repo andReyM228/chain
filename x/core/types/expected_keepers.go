@@ -1,8 +1,11 @@
 package types
 
 import (
+	"context"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/x/auth/types"
+
+	allowedtypes "one/x/allowed/types"
 )
 
 // AccountKeeper defines the expected account keeper used for simulations (noalias)
@@ -21,4 +24,9 @@ type BankKeeper interface {
 	SendCoinsFromModuleToAccount(ctx sdk.Context, senderModule string, recipientAddr sdk.AccAddress, amt sdk.Coins) error
 	SendCoinsFromAccountToModule(ctx sdk.Context, senderAddr sdk.AccAddress, recipientModule string, amt sdk.Coins) error
 	// Methods imported from bank should be defined here
+}
+
+// AllowedKeeper defines the expected interface needed to retrieve allowed addresses.
+type AllowedKeeper interface {
+	AddressByAddress(goCtx context.Context, req *allowedtypes.QueryGetAddressByAddressRequest) (*allowedtypes.QueryGetAdressesResponse, error)
 }

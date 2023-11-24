@@ -53,3 +53,18 @@ func (k Keeper) Adresses(goCtx context.Context, req *types.QueryGetAdressesReque
 
 	return &types.QueryGetAdressesResponse{Adresses: adresses}, nil
 }
+
+// AddressByAddress returns the adress with the given address
+func (k Keeper) AddressByAddress(goCtx context.Context, req *types.QueryGetAddressByAddressRequest) (*types.QueryGetAdressesResponse, error) {
+	if req == nil {
+		return nil, status.Error(codes.InvalidArgument, "invalid request")
+	}
+
+	ctx := sdk.UnwrapSDKContext(goCtx)
+	address, ok := k.GetAdressesByAdress(ctx, req.Address)
+	if !ok {
+		return nil, sdkerrors.ErrKeyNotFound
+	}
+
+	return &types.QueryGetAdressesResponse{Adresses: address}, nil
+}

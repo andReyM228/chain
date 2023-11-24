@@ -71,6 +71,19 @@ func (k Keeper) GetAdresses(ctx sdk.Context, id uint64) (val types.Adresses, fou
 	return val, true
 }
 
+// GetAdressesByAdress returns a adresses from its adress
+func (k Keeper) GetAdressesByAdress(ctx sdk.Context, adress string) (val types.Adresses, found bool) {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AdressesKey))
+	iterator := sdk.KVStorePrefixIterator(store, []byte(adress))
+	defer iterator.Close()
+	for ; iterator.Valid(); iterator.Next() {
+		var val types.Adresses
+		k.cdc.MustUnmarshal(iterator.Value(), &val)
+		return val, true
+	}
+	return val, false
+}
+
 // RemoveAdresses removes a adresses from the store
 func (k Keeper) RemoveAdresses(ctx sdk.Context, id uint64) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AdressesKey))

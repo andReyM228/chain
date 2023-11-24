@@ -13,6 +13,7 @@ service Msg {
   rpc UpdateStats (MsgUpdateStats) returns (MsgUpdateStatsResponse);
   rpc DeleteStats (MsgDeleteStats) returns (MsgDeleteStatsResponse);
   rpc Issue       (MsgIssue      ) returns (MsgIssueResponse      );
+  rpc Withdraw    (MsgWithdraw   ) returns (MsgWithdrawResponse   );
 }
 message MsgCreateStats {
   string     creator = 1;
@@ -47,4 +48,13 @@ message MsgIssue {
 }
 
 message MsgIssueResponse {}
+
+message MsgWithdraw {
+  string creator = 1;
+  string amount  = 2;
+  string address = 3;
+  string denom   = 4;
+}
+
+message MsgWithdrawResponse {}
 

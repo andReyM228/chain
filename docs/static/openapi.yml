@@ -46563,6 +46563,50 @@ paths:
           type: boolean
       tags:
         - Query
+  /one/allowed/adresses/{address}:
+    get:
+      operationId: OneAllowedAddressByAddress
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              Adresses:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uint64
+                  adress:
+                    type: string
+                  creator:
+                    type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: address
+          in: path
+          required: true
+          type: string
+      tags:
+        - Query
   /one/allowed/adresses/{id}:
     get:
       summary: Queries a list of Adresses items.
@@ -75761,6 +75805,8 @@ definitions:
   one.core.MsgIssueResponse:
     type: object
   one.core.MsgUpdateStatsResponse:
+    type: object
+  one.core.MsgWithdrawResponse:
     type: object
   one.core.Params:
     type: object

@@ -24,6 +24,12 @@ service Query {
     option (google.api.http).get = "/one/allowed/adresses/{id}";
   
   }
+
+  rpc AddressByAddress    (QueryGetAddressByAddressRequest) returns (QueryGetAdressesResponse) {
+    option (google.api.http).get = "/one/allowed/adresses/{address}";
+  }
+
+
   rpc AdressesAll (QueryAllAdressesRequest) returns (QueryAllAdressesResponse) {
     option (google.api.http).get = "/one/allowed/adresses";
   
@@ -41,6 +47,10 @@ message QueryParamsResponse {
 
 message QueryGetAdressesRequest {
   uint64 id = 1;
+}
+
+message QueryGetAddressByAddressRequest {
+  string address = 1;
 }
 
 message QueryGetAdressesResponse {

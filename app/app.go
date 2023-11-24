@@ -557,6 +557,7 @@ func New(
 		keys[coremoduletypes.MemStoreKey],
 		app.GetSubspace(coremoduletypes.ModuleName),
 		app.BankKeeper,
+		app.AllowedKeeper,
 	)
 	coreModule := coremodule.NewAppModule(appCodec, app.CoreKeeper, app.AccountKeeper, app.BankKeeper)
 
