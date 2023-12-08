@@ -4,7 +4,58 @@ import (
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"one/x/core/types"
+	"time"
 )
+
+func (k Keeper) SaveStatsIssue(ctx sdk.Context, amount sdk.Coins) {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.StatsKeyPrefix))
+
+	currentDate := time.Now().Format(time.DateOnly)
+
+	stat, found := k.GetStatsByDate(ctx, currentDate)
+	if !found {
+
+	}
+
+	stat.Stats.CountIssue += 1
+	//stat.Stats.AmountIssue += amount
+
+	result := k.cdc.MustMarshal(&stat)
+
+	store.Set(types.StatsKey(stat.Index), result)
+}
+
+func (k Keeper) GetStatsByDate(ctx sdk.Context, date string) (stats types.Stats, found bool) {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.StatsKeyPrefix))
+
+	iterator := sdk.KVStorePrefixIterator(store, []byte{})
+
+	defer iterator.Close()
+
+	parsedDate, err := time.Parse(time.DateOnly, date)
+	if err != nil {
+		return stats, false
+	}
+
+	for ; iterator.Valid(); iterator.Next() {
+		var val types.Stats
+		k.cdc.MustUnmarshal(iterator.Value(), &val)
+
+		statsDate, err := time.Parse(time.DateOnly, val.Date)
+		if err != nil {
+			continue
+		}
+
+		if statsDate.Equal(parsedDate) {
+			return val, true
+		}
+	}
+
+	return stats, false
+}
+
+// проверить созданы ли сегодня уже статсы, если созданы то обновить, если нет то создать
+//
 
 // SetStats set a specific stats in the store from its index
 func (k Keeper) SetStats(ctx sdk.Context, stats types.Stats) {

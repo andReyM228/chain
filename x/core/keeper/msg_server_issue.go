@@ -2,11 +2,8 @@ package keeper
 
 import (
 	"context"
-
 	sdkioerrors "cosmossdk.io/errors"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-
-	allowedtypes "one/x/allowed/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"one/x/core/types"
@@ -26,8 +23,8 @@ func (k msgServer) Issue(goCtx context.Context, msg *types.MsgIssue) (*types.Msg
 	}
 
 	// Check if the address is allowed
-	_, err = k.Keeper.allowedKeeper.AddressByAddress(ctx, &allowedtypes.QueryGetAddressByAddressRequest{Address: msg.Creator})
-	if err != nil {
+	_, ok = k.Keeper.allowedKeeper.GetAdressesByAdress(ctx, msg.Creator)
+	if !ok {
 		return nil, sdkioerrors.Wrap(sdkerrors.ErrUnauthorized, "address is not allowed")
 	}
 

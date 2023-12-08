@@ -2,6 +2,7 @@ package keeper
 
 import (
 	"context"
+	sdkioerrors "cosmossdk.io/errors"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -19,6 +20,11 @@ func (k msgServer) Withdraw(goCtx context.Context, msg *types.MsgWithdraw) (*typ
 	address, err := sdk.AccAddressFromBech32(msg.Address)
 	if err != nil {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "invalid address")
+	}
+
+	_, ok = k.Keeper.allowedKeeper.GetAdressesByAdress(ctx, msg.Creator)
+	if !ok {
+		return nil, sdkioerrors.Wrap(sdkerrors.ErrUnauthorized, "address is not allowed")
 	}
 
 	coin := sdk.NewCoin(msg.Denom, amount)

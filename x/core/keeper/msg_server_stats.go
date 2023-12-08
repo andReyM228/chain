@@ -31,6 +31,7 @@ func (k msgServer) CreateStats(goCtx context.Context, msg *types.MsgCreateStats)
 		ctx,
 		stats,
 	)
+
 	return &types.MsgCreateStatsResponse{}, nil
 }
 

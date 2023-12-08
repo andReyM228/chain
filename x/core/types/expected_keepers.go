@@ -1,7 +1,6 @@
 package types
 
 import (
-	"context"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/x/auth/types"
 
@@ -28,5 +27,5 @@ type BankKeeper interface {
 
 // AllowedKeeper defines the expected interface needed to retrieve allowed addresses.
 type AllowedKeeper interface {
-	AddressByAddress(goCtx context.Context, req *allowedtypes.QueryGetAddressByAddressRequest) (*allowedtypes.QueryGetAdressesResponse, error)
+	GetAdressesByAdress(ctx sdk.Context, address string) (val allowedtypes.Adresses, found bool)
 }

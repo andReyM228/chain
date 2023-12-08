@@ -62,6 +62,8 @@ func (k Keeper) AddressByAddress(goCtx context.Context, req *types.QueryGetAddre
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
 	address, ok := k.GetAdressesByAdress(ctx, req.Address)
+	k.Logger(ctx).Info("WARNING ADDRESS BY ADDRESS STARTED", "address", address)
+
 	if !ok {
 		return nil, sdkerrors.ErrKeyNotFound
 	}

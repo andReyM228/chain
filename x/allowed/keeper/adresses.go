@@ -2,7 +2,6 @@ package keeper
 
 import (
 	"encoding/binary"
-
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"one/x/allowed/types"
@@ -72,14 +71,20 @@ func (k Keeper) GetAdresses(ctx sdk.Context, id uint64) (val types.Adresses, fou
 }
 
 // GetAdressesByAdress returns a adresses from its adress
-func (k Keeper) GetAdressesByAdress(ctx sdk.Context, adress string) (val types.Adresses, found bool) {
+func (k Keeper) GetAdressesByAdress(ctx sdk.Context, address string) (val types.Adresses, found bool) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AdressesKey))
-	iterator := sdk.KVStorePrefixIterator(store, []byte(adress))
+	iterator := sdk.KVStorePrefixIterator(store, []byte{})
+
 	defer iterator.Close()
+
 	for ; iterator.Valid(); iterator.Next() {
 		var val types.Adresses
 		k.cdc.MustUnmarshal(iterator.Value(), &val)
-		return val, true
+
+		if val.Adress == address {
+			return val, true
+		}
+
 	}
 	return val, false
 }
