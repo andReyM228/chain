@@ -1,8 +1,8 @@
 package keeper
 
 import (
+	"github.com/andReyM228/one/x/allowed/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"one/x/allowed/types"
 )
 
 // GetParams get all parameters as types.Params

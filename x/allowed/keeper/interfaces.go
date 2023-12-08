@@ -3,7 +3,7 @@ package keeper
 import (
 	"context"
 
-	allowedtypes "one/x/allowed/types"
+	allowedtypes "github.com/andReyM228/one/x/allowed/types"
 )
 
 type AllowedKeeper interface {

@@ -3,14 +3,14 @@ package core
 import (
 	"math/rand"
 
+	"github.com/andReyM228/one/testutil/sample"
+	coresimulation "github.com/andReyM228/one/x/core/simulation"
+	"github.com/andReyM228/one/x/core/types"
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 	"github.com/cosmos/cosmos-sdk/x/simulation"
-	"one/testutil/sample"
-	coresimulation "one/x/core/simulation"
-	"one/x/core/types"
 )
 
 // avoid unused import issue

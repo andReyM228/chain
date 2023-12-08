@@ -3,12 +3,12 @@ package keeper
 import (
 	"context"
 
+	"github.com/andReyM228/one/x/core/types"
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/query"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-	"one/x/core/types"
 )
 
 func (k Keeper) StatsAll(goCtx context.Context, req *types.QueryAllStatsRequest) (*types.QueryAllStatsResponse, error) {

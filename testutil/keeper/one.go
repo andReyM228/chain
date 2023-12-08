@@ -3,6 +3,8 @@ package keeper
 import (
 	"testing"
 
+	"github.com/andReyM228/one/x/one/keeper"
+	"github.com/andReyM228/one/x/one/types"
 	tmdb "github.com/cometbft/cometbft-db"
 	"github.com/cometbft/cometbft/libs/log"
 	tmproto "github.com/cometbft/cometbft/proto/tendermint/types"
@@ -13,8 +15,6 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	typesparams "github.com/cosmos/cosmos-sdk/x/params/types"
 	"github.com/stretchr/testify/require"
-	"one/x/one/keeper"
-	"one/x/one/types"
 )
 
 func OneKeeper(t testing.TB) (*keeper.Keeper, sdk.Context) {

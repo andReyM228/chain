@@ -4,12 +4,12 @@ import (
 	"math/rand"
 
 	simappparams "cosmossdk.io/simapp/params"
+	"github.com/andReyM228/one/x/allowed/keeper"
+	"github.com/andReyM228/one/x/allowed/types"
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 	"github.com/cosmos/cosmos-sdk/x/simulation"
-	"one/x/allowed/keeper"
-	"one/x/allowed/types"
 )
 
 func SimulateMsgCreateAdresses(

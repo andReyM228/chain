@@ -11,10 +11,10 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	"one/testutil/network"
-	"one/testutil/nullify"
-	"one/x/allowed/client/cli"
-	"one/x/allowed/types"
+	"github.com/andReyM228/one/testutil/network"
+	"github.com/andReyM228/one/testutil/nullify"
+	"github.com/andReyM228/one/x/allowed/client/cli"
+	"github.com/andReyM228/one/x/allowed/types"
 )
 
 func networkWithAdressesObjects(t *testing.T, n int) (*network.Network, []types.Adresses) {

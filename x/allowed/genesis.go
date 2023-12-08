@@ -1,9 +1,9 @@
 package allowed
 
 import (
+	"github.com/andReyM228/one/x/allowed/keeper"
+	"github.com/andReyM228/one/x/allowed/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"one/x/allowed/keeper"
-	"one/x/allowed/types"
 )
 
 // InitGenesis initializes the module's state from a provided genesis state.

@@ -6,7 +6,7 @@ import (
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"github.com/stretchr/testify/require"
 
-	"one/x/allowed/types"
+	"github.com/andReyM228/one/x/allowed/types"
 )
 
 func TestAdressesMsgServerCreate(t *testing.T) {

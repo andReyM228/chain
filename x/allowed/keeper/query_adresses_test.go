@@ -10,9 +10,9 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	keepertest "one/testutil/keeper"
-	"one/testutil/nullify"
-	"one/x/allowed/types"
+	keepertest "github.com/andReyM228/one/testutil/keeper"
+	"github.com/andReyM228/one/testutil/nullify"
+	"github.com/andReyM228/one/x/allowed/types"
 )
 
 func TestAdressesQuerySingle(t *testing.T) {

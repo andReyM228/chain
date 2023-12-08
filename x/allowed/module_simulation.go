@@ -3,14 +3,14 @@ package allowed
 import (
 	"math/rand"
 
+	"github.com/andReyM228/one/testutil/sample"
+	allowedsimulation "github.com/andReyM228/one/x/allowed/simulation"
+	"github.com/andReyM228/one/x/allowed/types"
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 	"github.com/cosmos/cosmos-sdk/x/simulation"
-	"one/testutil/sample"
-	allowedsimulation "one/x/allowed/simulation"
-	"one/x/allowed/types"
 )
 
 // avoid unused import issue

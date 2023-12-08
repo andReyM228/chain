@@ -11,14 +11,14 @@ import (
 
 	abci "github.com/cometbft/cometbft/abci/types"
 
+	"github.com/andReyM228/one/x/core/client/cli"
+	"github.com/andReyM228/one/x/core/keeper"
+	"github.com/andReyM228/one/x/core/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/codec"
 	cdctypes "github.com/cosmos/cosmos-sdk/codec/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
-	"one/x/core/client/cli"
-	"one/x/core/keeper"
-	"one/x/core/types"
 )
 
 var (

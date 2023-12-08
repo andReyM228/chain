@@ -3,11 +3,11 @@ package one_test
 import (
 	"testing"
 
+	keepertest "github.com/andReyM228/one/testutil/keeper"
+	"github.com/andReyM228/one/testutil/nullify"
+	"github.com/andReyM228/one/x/one"
+	"github.com/andReyM228/one/x/one/types"
 	"github.com/stretchr/testify/require"
-	keepertest "one/testutil/keeper"
-	"one/testutil/nullify"
-	"one/x/one"
-	"one/x/one/types"
 )
 
 func TestGenesis(t *testing.T) {

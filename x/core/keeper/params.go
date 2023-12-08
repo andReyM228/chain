@@ -1,8 +1,8 @@
 package keeper
 
 import (
+	"github.com/andReyM228/one/x/core/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"one/x/core/types"
 )
 
 // GetParams get all parameters as types.Params

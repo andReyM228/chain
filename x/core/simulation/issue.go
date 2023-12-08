@@ -3,11 +3,11 @@ package simulation
 import (
 	"math/rand"
 
+	"github.com/andReyM228/one/x/core/keeper"
+	"github.com/andReyM228/one/x/core/types"
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
-	"one/x/core/keeper"
-	"one/x/core/types"
 )
 
 func SimulateMsgIssue(

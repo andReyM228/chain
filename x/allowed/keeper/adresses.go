@@ -2,9 +2,9 @@ package keeper
 
 import (
 	"encoding/binary"
+	"github.com/andReyM228/one/x/allowed/types"
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"one/x/allowed/types"
 )
 
 // GetAdressesCount get the total number of adresses

@@ -5,8 +5,8 @@ import (
 	sdkioerrors "cosmossdk.io/errors"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 
+	"github.com/andReyM228/one/x/core/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"one/x/core/types"
 )
 
 func (k msgServer) Issue(goCtx context.Context, msg *types.MsgIssue) (*types.MsgIssueResponse, error) {

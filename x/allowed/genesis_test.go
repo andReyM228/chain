@@ -3,11 +3,11 @@ package allowed_test
 import (
 	"testing"
 
+	keepertest "github.com/andReyM228/one/testutil/keeper"
+	"github.com/andReyM228/one/testutil/nullify"
+	"github.com/andReyM228/one/x/allowed"
+	"github.com/andReyM228/one/x/allowed/types"
 	"github.com/stretchr/testify/require"
-	keepertest "one/testutil/keeper"
-	"one/testutil/nullify"
-	"one/x/allowed"
-	"one/x/allowed/types"
 )
 
 func TestGenesis(t *testing.T) {

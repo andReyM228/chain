@@ -3,12 +3,12 @@ package keeper_test
 import (
 	"testing"
 
+	keepertest "github.com/andReyM228/one/testutil/keeper"
+	"github.com/andReyM228/one/testutil/nullify"
+	"github.com/andReyM228/one/x/allowed/keeper"
+	"github.com/andReyM228/one/x/allowed/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
-	keepertest "one/testutil/keeper"
-	"one/testutil/nullify"
-	"one/x/allowed/keeper"
-	"one/x/allowed/types"
 )
 
 func createNAdresses(keeper *keeper.Keeper, ctx sdk.Context, n int) []types.Adresses {

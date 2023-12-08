@@ -3,11 +3,11 @@ package core_test
 import (
 	"testing"
 
+	keepertest "github.com/andReyM228/one/testutil/keeper"
+	"github.com/andReyM228/one/testutil/nullify"
+	"github.com/andReyM228/one/x/core"
+	"github.com/andReyM228/one/x/core/types"
 	"github.com/stretchr/testify/require"
-	keepertest "one/testutil/keeper"
-	"one/testutil/nullify"
-	"one/x/core"
-	"one/x/core/types"
 )
 
 func TestGenesis(t *testing.T) {

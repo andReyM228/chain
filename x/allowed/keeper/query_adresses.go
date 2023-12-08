@@ -3,13 +3,13 @@ package keeper
 import (
 	"context"
 
+	"github.com/andReyM228/one/x/allowed/types"
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"github.com/cosmos/cosmos-sdk/types/query"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-	"one/x/allowed/types"
 )
 
 func (k Keeper) AdressesAll(goCtx context.Context, req *types.QueryAllAdressesRequest) (*types.QueryAllAdressesResponse, error) {

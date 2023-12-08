@@ -4,11 +4,11 @@ import (
 	"context"
 	"testing"
 
+	keepertest "github.com/andReyM228/one/testutil/keeper"
+	"github.com/andReyM228/one/x/allowed/keeper"
+	"github.com/andReyM228/one/x/allowed/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
-	keepertest "one/testutil/keeper"
-	"one/x/allowed/keeper"
-	"one/x/allowed/types"
 )
 
 func setupMsgServer(t testing.TB) (types.MsgServer, context.Context) {

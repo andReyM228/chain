@@ -3,7 +3,7 @@ package cmd
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"one/app"
+	"github.com/andReyM228/one/app"
 )
 
 func initSDKConfig() {

@@ -110,19 +110,19 @@ import (
 	ibctm "github.com/cosmos/ibc-go/v7/modules/light-clients/07-tendermint"
 	"github.com/spf13/cast"
 
-	allowedmodule "one/x/allowed"
-	allowedmodulekeeper "one/x/allowed/keeper"
-	allowedmoduletypes "one/x/allowed/types"
-	coremodule "one/x/core"
-	coremodulekeeper "one/x/core/keeper"
-	coremoduletypes "one/x/core/types"
-	onemodule "one/x/one"
-	onemodulekeeper "one/x/one/keeper"
-	onemoduletypes "one/x/one/types"
+	allowedmodule "github.com/andReyM228/one/x/allowed"
+	allowedmodulekeeper "github.com/andReyM228/one/x/allowed/keeper"
+	allowedmoduletypes "github.com/andReyM228/one/x/allowed/types"
+	coremodule "github.com/andReyM228/one/x/core"
+	coremodulekeeper "github.com/andReyM228/one/x/core/keeper"
+	coremoduletypes "github.com/andReyM228/one/x/core/types"
+	onemodule "github.com/andReyM228/one/x/one"
+	onemodulekeeper "github.com/andReyM228/one/x/one/keeper"
+	onemoduletypes "github.com/andReyM228/one/x/one/types"
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 
-	appparams "one/app/params"
-	"one/docs"
+	appparams "github.com/andReyM228/one/app/params"
+	"github.com/andReyM228/one/docs"
 )
 
 const (

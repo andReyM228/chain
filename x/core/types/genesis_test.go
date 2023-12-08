@@ -3,8 +3,8 @@ package types_test
 import (
 	"testing"
 
+	"github.com/andReyM228/one/x/core/types"
 	"github.com/stretchr/testify/require"
-	"one/x/core/types"
 )
 
 func TestGenesisState_Validate(t *testing.T) {

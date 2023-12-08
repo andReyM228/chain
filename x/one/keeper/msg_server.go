@@ -1,7 +1,7 @@
 package keeper
 
 import (
-	"one/x/one/types"
+	"github.com/andReyM228/one/x/one/types"
 )
 
 type msgServer struct {

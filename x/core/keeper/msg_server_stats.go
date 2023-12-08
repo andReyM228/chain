@@ -3,9 +3,9 @@ package keeper
 import (
 	"context"
 
+	"github.com/andReyM228/one/x/core/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-	"one/x/core/types"
 )
 
 func (k msgServer) CreateStats(goCtx context.Context, msg *types.MsgCreateStats) (*types.MsgCreateStatsResponse, error) {

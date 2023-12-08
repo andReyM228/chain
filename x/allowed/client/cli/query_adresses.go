@@ -3,10 +3,10 @@ package cli
 import (
 	"strconv"
 
+	"github.com/andReyM228/one/x/allowed/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/spf13/cobra"
-	"one/x/allowed/types"
 )
 
 func CmdListAdresses() *cobra.Command {

@@ -4,9 +4,9 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/andReyM228/one/x/allowed/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-	"one/x/allowed/types"
 )
 
 func (k msgServer) CreateAdresses(goCtx context.Context, msg *types.MsgCreateAdresses) (*types.MsgCreateAdressesResponse, error) {

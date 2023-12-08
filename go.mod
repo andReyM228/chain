@@ -1,4 +1,4 @@
-module one
+module github.com/andReyM228/one
 
 go 1.21
 

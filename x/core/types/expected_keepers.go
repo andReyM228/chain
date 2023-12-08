@@ -4,7 +4,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/x/auth/types"
 
-	allowedtypes "one/x/allowed/types"
+	allowedtypes "github.com/andReyM228/one/x/allowed/types"
 )
 
 // AccountKeeper defines the expected account keeper used for simulations (noalias)

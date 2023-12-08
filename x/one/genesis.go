@@ -1,9 +1,9 @@
 package one
 
 import (
+	"github.com/andReyM228/one/x/one/keeper"
+	"github.com/andReyM228/one/x/one/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"one/x/one/keeper"
-	"one/x/one/types"
 )
 
 // InitGenesis initializes the module's state from a provided genesis state.
