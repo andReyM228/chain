@@ -4,21 +4,74 @@ import (
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"one/x/core/types"
+	"strconv"
 	"time"
 )
 
 func (k Keeper) SaveStatsIssue(ctx sdk.Context, amount sdk.Coins) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.StatsKeyPrefix))
 
+	amountIssue := sdk.Coins{}
+
 	currentDate := time.Now().Format(time.DateOnly)
 
 	stat, found := k.GetStatsByDate(ctx, currentDate)
 	if !found {
+		stats := k.GetAllStats(ctx)
 
+		indexStats := len(stats) + 1
+
+		stat = types.Stats{
+			Index: strconv.Itoa(indexStats),
+			Date:  currentDate,
+			Stats: &types.DailyStats{
+				AmountIssue:    sdk.Coins{},
+				AmountWithdraw: sdk.Coins{},
+				CountIssue:     0,
+				CountWithdraw:  0,
+			},
+		}
 	}
 
+	amountIssue = amountIssue.Add(amount...)
+
 	stat.Stats.CountIssue += 1
-	//stat.Stats.AmountIssue += amount
+	stat.Stats.AmountIssue = amountIssue
+
+	result := k.cdc.MustMarshal(&stat)
+
+	store.Set(types.StatsKey(stat.Index), result)
+}
+
+func (k Keeper) SaveStatsWithdraw(ctx sdk.Context, amount sdk.Coins) {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.StatsKeyPrefix))
+
+	amountWithdraw := sdk.Coins{}
+
+	currentDate := time.Now().Format(time.DateOnly)
+
+	stat, found := k.GetStatsByDate(ctx, currentDate)
+	if !found {
+		stats := k.GetAllStats(ctx)
+
+		indexStats := len(stats) + 1
+
+		stat = types.Stats{
+			Index: strconv.Itoa(indexStats),
+			Date:  currentDate,
+			Stats: &types.DailyStats{
+				AmountIssue:    sdk.Coins{},
+				AmountWithdraw: sdk.Coins{},
+				CountIssue:     0,
+				CountWithdraw:  0,
+			},
+		}
+	}
+
+	amountWithdraw = amountWithdraw.Add(amount...)
+
+	stat.Stats.CountWithdraw += 1
+	stat.Stats.AmountWithdraw = amountWithdraw
 
 	result := k.cdc.MustMarshal(&stat)
 
@@ -53,9 +106,6 @@ func (k Keeper) GetStatsByDate(ctx sdk.Context, date string) (stats types.Stats,
 
 	return stats, false
 }
-
-// проверить созданы ли сегодня уже статсы, если созданы то обновить, если нет то создать
-//
 
 // SetStats set a specific stats in the store from its index
 func (k Keeper) SetStats(ctx sdk.Context, stats types.Stats) {

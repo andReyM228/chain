@@ -3,10 +3,12 @@ package one.core;
 
 option go_package = "one/x/core/types";
 
+import "gogoproto/gogo.proto";
+import "cosmos/base/v1beta1/coin.proto";
+
 message DailyStats {
-  
-  int32 amountIssue = 1; 
-  int32 amountWithdraw = 2; 
+  repeated cosmos.base.v1beta1.Coin amountIssue = 1 [(gogoproto.nullable) = false];
+  repeated cosmos.base.v1beta1.Coin amountWithdraw = 2 [(gogoproto.nullable) = false];
   int32 countIssue = 3; 
   int32 countWithdraw = 4; 
 }

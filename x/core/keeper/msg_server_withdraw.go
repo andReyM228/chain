@@ -41,6 +41,8 @@ func (k msgServer) Withdraw(goCtx context.Context, msg *types.MsgWithdraw) (*typ
 		return nil, err
 	}
 
+	k.SaveStatsWithdraw(ctx, coins)
+
 	err = ctx.EventManager().EmitTypedEvents(msg)
 	if err != nil {
 		return nil, err

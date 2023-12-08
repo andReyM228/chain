@@ -5,6 +5,8 @@ package types
 
 import (
 	fmt "fmt"
+	types "github.com/cosmos/cosmos-sdk/types"
+	_ "github.com/cosmos/gogoproto/gogoproto"
 	proto "github.com/cosmos/gogoproto/proto"
 	io "io"
 	math "math"
@@ -23,10 +25,10 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 type DailyStats struct {
-	AmountIssue    int32 `protobuf:"varint,1,opt,name=amountIssue,proto3" json:"amountIssue,omitempty"`
-	AmountWithdraw int32 `protobuf:"varint,2,opt,name=amountWithdraw,proto3" json:"amountWithdraw,omitempty"`
-	CountIssue     int32 `protobuf:"varint,3,opt,name=countIssue,proto3" json:"countIssue,omitempty"`
-	CountWithdraw  int32 `protobuf:"varint,4,opt,name=countWithdraw,proto3" json:"countWithdraw,omitempty"`
+	AmountIssue    []types.Coin `protobuf:"bytes,1,rep,name=amountIssue,proto3" json:"amountIssue"`
+	AmountWithdraw []types.Coin `protobuf:"bytes,2,rep,name=amountWithdraw,proto3" json:"amountWithdraw"`
+	CountIssue     int32        `protobuf:"varint,3,opt,name=countIssue,proto3" json:"countIssue,omitempty"`
+	CountWithdraw  int32        `protobuf:"varint,4,opt,name=countWithdraw,proto3" json:"countWithdraw,omitempty"`
 }
 
 func (m *DailyStats) Reset()         { *m = DailyStats{} }
@@ -62,18 +64,18 @@ func (m *DailyStats) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_DailyStats proto.InternalMessageInfo
 
-func (m *DailyStats) GetAmountIssue() int32 {
+func (m *DailyStats) GetAmountIssue() []types.Coin {
 	if m != nil {
 		return m.AmountIssue
 	}
-	return 0
+	return nil
 }
 
-func (m *DailyStats) GetAmountWithdraw() int32 {
+func (m *DailyStats) GetAmountWithdraw() []types.Coin {
 	if m != nil {
 		return m.AmountWithdraw
 	}
-	return 0
+	return nil
 }
 
 func (m *DailyStats) GetCountIssue() int32 {
@@ -97,19 +99,23 @@ func init() {
 func init() { proto.RegisterFile("one/core/daily_stats.proto", fileDescriptor_4b18605964cf4b27) }
 
 var fileDescriptor_4b18605964cf4b27 = []byte{
-	// 184 bytes of a gzipped FileDescriptorProto
+	// 252 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x92, 0xca, 0xcf, 0x4b, 0xd5,
 	0x4f, 0xce, 0x2f, 0x4a, 0xd5, 0x4f, 0x49, 0xcc, 0xcc, 0xa9, 0x8c, 0x2f, 0x2e, 0x49, 0x2c, 0x29,
-	0xd6, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0xc8, 0xcf, 0x4b, 0xd5, 0x03, 0xc9, 0x29, 0xcd,
-	0x61, 0xe4, 0xe2, 0x72, 0x01, 0xc9, 0x07, 0x83, 0xa4, 0x85, 0x14, 0xb8, 0xb8, 0x13, 0x73, 0xf3,
-	0x4b, 0xf3, 0x4a, 0x3c, 0x8b, 0x8b, 0x4b, 0x53, 0x25, 0x18, 0x15, 0x18, 0x35, 0x58, 0x83, 0x90,
-	0x85, 0x84, 0xd4, 0xb8, 0xf8, 0x20, 0xdc, 0xf0, 0xcc, 0x92, 0x8c, 0x94, 0xa2, 0xc4, 0x72, 0x09,
-	0x26, 0xb0, 0x22, 0x34, 0x51, 0x21, 0x39, 0x2e, 0xae, 0x64, 0x84, 0x41, 0xcc, 0x60, 0x35, 0x48,
-	0x22, 0x42, 0x2a, 0x5c, 0xbc, 0xc9, 0x28, 0xc6, 0xb0, 0x80, 0x95, 0xa0, 0x0a, 0x3a, 0x69, 0x9d,
-	0x78, 0x24, 0xc7, 0x78, 0xe1, 0x91, 0x1c, 0xe3, 0x83, 0x47, 0x72, 0x8c, 0x13, 0x1e, 0xcb, 0x31,
-	0x5c, 0x78, 0x2c, 0xc7, 0x70, 0xe3, 0xb1, 0x1c, 0x43, 0x94, 0x00, 0xc8, 0x7b, 0x15, 0x10, 0x0f,
-	0x96, 0x54, 0x16, 0xa4, 0x16, 0x27, 0xb1, 0x81, 0xfd, 0x66, 0x0c, 0x08, 0x00, 0x00, 0xff, 0xff,
-	0xb9, 0xda, 0xe3, 0xf0, 0xf9, 0x00, 0x00, 0x00,
+	0xd6, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0xc8, 0xcf, 0x4b, 0xd5, 0x03, 0xc9, 0x49, 0x89,
+	0xa4, 0xe7, 0xa7, 0xe7, 0x83, 0x05, 0xf5, 0x41, 0x2c, 0x88, 0xbc, 0x94, 0x5c, 0x72, 0x7e, 0x71,
+	0x6e, 0x7e, 0xb1, 0x7e, 0x52, 0x62, 0x71, 0xaa, 0x7e, 0x99, 0x61, 0x52, 0x6a, 0x49, 0xa2, 0xa1,
+	0x7e, 0x72, 0x7e, 0x66, 0x1e, 0x44, 0x5e, 0xe9, 0x1e, 0x23, 0x17, 0x97, 0x0b, 0xc8, 0xd4, 0x60,
+	0x90, 0xa1, 0x42, 0x8e, 0x5c, 0xdc, 0x89, 0xb9, 0xf9, 0xa5, 0x79, 0x25, 0x9e, 0xc5, 0xc5, 0xa5,
+	0xa9, 0x12, 0x8c, 0x0a, 0xcc, 0x1a, 0xdc, 0x46, 0x92, 0x7a, 0x10, 0x43, 0xf4, 0x40, 0x86, 0xe8,
+	0x41, 0x0d, 0xd1, 0x73, 0xce, 0xcf, 0xcc, 0x73, 0x62, 0x39, 0x71, 0x4f, 0x9e, 0x21, 0x08, 0x59,
+	0x8f, 0x90, 0x3b, 0x17, 0x1f, 0x84, 0x1b, 0x9e, 0x59, 0x92, 0x91, 0x52, 0x94, 0x58, 0x2e, 0xc1,
+	0x44, 0x9c, 0x29, 0x68, 0xda, 0x84, 0xe4, 0xb8, 0xb8, 0x92, 0x11, 0x4e, 0x61, 0x56, 0x60, 0xd4,
+	0x60, 0x0d, 0x42, 0x12, 0x11, 0x52, 0xe1, 0xe2, 0x4d, 0x46, 0xb1, 0x87, 0x05, 0xac, 0x04, 0x55,
+	0xd0, 0x49, 0xeb, 0xc4, 0x23, 0x39, 0xc6, 0x0b, 0x8f, 0xe4, 0x18, 0x1f, 0x3c, 0x92, 0x63, 0x9c,
+	0xf0, 0x58, 0x8e, 0xe1, 0xc2, 0x63, 0x39, 0x86, 0x1b, 0x8f, 0xe5, 0x18, 0xa2, 0x04, 0x40, 0xc1,
+	0x5a, 0x01, 0x09, 0xd8, 0x92, 0xca, 0x82, 0xd4, 0xe2, 0x24, 0x36, 0x70, 0x98, 0x18, 0x03, 0x02,
+	0x00, 0x00, 0xff, 0xff, 0x33, 0x4b, 0x9a, 0x5f, 0x71, 0x01, 0x00, 0x00,
 }
 
 func (m *DailyStats) Marshal() (dAtA []byte, err error) {
@@ -142,15 +148,33 @@ func (m *DailyStats) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 		i--
 		dAtA[i] = 0x18
 	}
-	if m.AmountWithdraw != 0 {
-		i = encodeVarintDailyStats(dAtA, i, uint64(m.AmountWithdraw))
-		i--
-		dAtA[i] = 0x10
+	if len(m.AmountWithdraw) > 0 {
+		for iNdEx := len(m.AmountWithdraw) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.AmountWithdraw[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintDailyStats(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0x12
+		}
 	}
-	if m.AmountIssue != 0 {
-		i = encodeVarintDailyStats(dAtA, i, uint64(m.AmountIssue))
-		i--
-		dAtA[i] = 0x8
+	if len(m.AmountIssue) > 0 {
+		for iNdEx := len(m.AmountIssue) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.AmountIssue[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintDailyStats(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0xa
+		}
 	}
 	return len(dAtA) - i, nil
 }
@@ -172,11 +196,17 @@ func (m *DailyStats) Size() (n int) {
 	}
 	var l int
 	_ = l
-	if m.AmountIssue != 0 {
-		n += 1 + sovDailyStats(uint64(m.AmountIssue))
+	if len(m.AmountIssue) > 0 {
+		for _, e := range m.AmountIssue {
+			l = e.Size()
+			n += 1 + l + sovDailyStats(uint64(l))
+		}
 	}
-	if m.AmountWithdraw != 0 {
-		n += 1 + sovDailyStats(uint64(m.AmountWithdraw))
+	if len(m.AmountWithdraw) > 0 {
+		for _, e := range m.AmountWithdraw {
+			l = e.Size()
+			n += 1 + l + sovDailyStats(uint64(l))
+		}
 	}
 	if m.CountIssue != 0 {
 		n += 1 + sovDailyStats(uint64(m.CountIssue))
@@ -223,10 +253,10 @@ func (m *DailyStats) Unmarshal(dAtA []byte) error {
 		}
 		switch fieldNum {
 		case 1:
-			if wireType != 0 {
+			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field AmountIssue", wireType)
 			}
-			m.AmountIssue = 0
+			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowDailyStats
@@ -236,16 +266,31 @@ func (m *DailyStats) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.AmountIssue |= int32(b&0x7F) << shift
+				msglen |= int(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
+			if msglen < 0 {
+				return ErrInvalidLengthDailyStats
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthDailyStats
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.AmountIssue = append(m.AmountIssue, types.Coin{})
+			if err := m.AmountIssue[len(m.AmountIssue)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
 		case 2:
-			if wireType != 0 {
+			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field AmountWithdraw", wireType)
 			}
-			m.AmountWithdraw = 0
+			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowDailyStats
@@ -255,11 +300,26 @@ func (m *DailyStats) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.AmountWithdraw |= int32(b&0x7F) << shift
+				msglen |= int(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
+			if msglen < 0 {
+				return ErrInvalidLengthDailyStats
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthDailyStats
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.AmountWithdraw = append(m.AmountWithdraw, types.Coin{})
+			if err := m.AmountWithdraw[len(m.AmountWithdraw)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
 		case 3:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field CountIssue", wireType)

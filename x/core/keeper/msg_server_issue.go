@@ -42,6 +42,8 @@ func (k msgServer) Issue(goCtx context.Context, msg *types.MsgIssue) (*types.Msg
 		return nil, err
 	}
 
+	k.SaveStatsIssue(ctx, coins)
+
 	err = ctx.EventManager().EmitTypedEvents(msg)
 	if err != nil {
 		return nil, err
