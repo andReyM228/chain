@@ -3,7 +3,7 @@ module github.com/andReyM228/chain_client
 go 1.20
 
 require (
-	github.com/cosmos/cosmos-sdk v0.50.1
+	github.com/cosmos/cosmos-sdk v0.47.3
 	google.golang.org/grpc v1.59.0
 )
 
