@@ -9,11 +9,11 @@ import (
 )
 
 func (k Keeper) SaveStatsIssue(ctx sdk.Context, amount sdk.Coins) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.StatsKeyPrefix))
-
-	amountIssue := sdk.Coins{}
-
-	currentDate := time.Now().Format(time.DateOnly)
+	var (
+		store       = prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.StatsKeyPrefix))
+		amountIssue sdk.Coins
+		currentDate = time.Now().Format(time.DateOnly)
+	)
 
 	stat, found := k.GetStatsByDate(ctx, currentDate)
 	if !found {
@@ -33,10 +33,10 @@ func (k Keeper) SaveStatsIssue(ctx sdk.Context, amount sdk.Coins) {
 		}
 	}
 
-	amountIssue = amountIssue.Add(amount...)
+	amountIssue = stat.Stats.AmountIssue
 
 	stat.Stats.CountIssue += 1
-	stat.Stats.AmountIssue = amountIssue
+	stat.Stats.AmountIssue = amountIssue.Add(amount...)
 
 	result := k.cdc.MustMarshal(&stat)
 
@@ -44,11 +44,11 @@ func (k Keeper) SaveStatsIssue(ctx sdk.Context, amount sdk.Coins) {
 }
 
 func (k Keeper) SaveStatsWithdraw(ctx sdk.Context, amount sdk.Coins) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.StatsKeyPrefix))
-
-	amountWithdraw := sdk.Coins{}
-
-	currentDate := time.Now().Format(time.DateOnly)
+	var (
+		store          = prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.StatsKeyPrefix))
+		amountWithdraw sdk.Coins
+		currentDate    = time.Now().Format(time.DateOnly)
+	)
 
 	stat, found := k.GetStatsByDate(ctx, currentDate)
 	if !found {
@@ -68,10 +68,10 @@ func (k Keeper) SaveStatsWithdraw(ctx sdk.Context, amount sdk.Coins) {
 		}
 	}
 
-	amountWithdraw = amountWithdraw.Add(amount...)
+	amountWithdraw = stat.Stats.AmountWithdraw
 
 	stat.Stats.CountWithdraw += 1
-	stat.Stats.AmountWithdraw = amountWithdraw
+	stat.Stats.AmountWithdraw = amountWithdraw.Add(amount...)
 
 	result := k.cdc.MustMarshal(&stat)
 
