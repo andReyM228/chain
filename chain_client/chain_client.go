@@ -1,7 +1,7 @@
 package chain_client
 
 import (
-	client_codec "github.com/andReyM228/chain_client/codec"
+	client_codec "github.com/andReyM228/one/chain_client/codec"
 	coremoduletypes "github.com/andReyM228/one/x/core/types"
 	"github.com/cosmos/cosmos-sdk/crypto/keyring"
 	sdk "github.com/cosmos/cosmos-sdk/types"
