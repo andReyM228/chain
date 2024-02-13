@@ -1,4 +1,4 @@
-module github.com/andReyM228/chain_client
+module github.com/andReyM228/one/chain_client
 
 go 1.21
 
