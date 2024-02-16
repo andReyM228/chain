@@ -2,6 +2,7 @@ package chain_client
 
 import (
 	"context"
+	"github.com/cosmos/cosmos-sdk/crypto/keyring"
 	"github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/tx"
 )
@@ -25,6 +26,7 @@ type (
 
 	Auth interface {
 		AddAccount(ctx context.Context, name string, mnemonic string) error
+		GenerateAccount(name string) (*keyring.Record, string, error)
 	}
 
 	Tx interface {
