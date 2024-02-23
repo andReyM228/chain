@@ -14,6 +14,7 @@ type (
 		Core
 		Auth
 		Tx
+		Unpacker
 	}
 
 	Bank interface {
