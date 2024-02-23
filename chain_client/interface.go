@@ -2,6 +2,7 @@ package chain_client
 
 import (
 	"context"
+	client_codec "github.com/andReyM228/one/chain_client/codec"
 	"github.com/cosmos/cosmos-sdk/crypto/keyring"
 	"github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/tx"
@@ -9,6 +10,7 @@ import (
 
 type (
 	Client interface {
+		client_codec.Codec
 		Bank
 		Core
 		Auth
