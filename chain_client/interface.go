@@ -10,7 +10,6 @@ import (
 
 type (
 	Client interface {
-		client_codec.Codec
 		Bank
 		Core
 		Auth
@@ -33,5 +32,9 @@ type (
 
 	Tx interface {
 		GetTx(ctx context.Context, hash string) (*tx.GetTxResponse, error)
+	}
+
+	Unpacker interface {
+		GetUnpacker() client_codec.Codec
 	}
 )

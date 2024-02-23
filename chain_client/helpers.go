@@ -2,6 +2,7 @@ package chain_client
 
 import (
 	"context"
+	client_codec "github.com/andReyM228/one/chain_client/codec"
 	"github.com/cosmos/cosmos-sdk/client/tx"
 	"github.com/cosmos/cosmos-sdk/crypto/keyring"
 	"github.com/cosmos/cosmos-sdk/types"
@@ -67,4 +68,8 @@ func (c *chainClient) SignAndSend(ctx context.Context, signer *keyring.Record, m
 	}
 
 	return res.TxResponse, nil
+}
+
+func (c *chainClient) GetUnpacker() client_codec.Codec {
+	return c.codec
 }
